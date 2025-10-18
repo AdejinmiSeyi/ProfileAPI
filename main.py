@@ -24,7 +24,7 @@ class Profile(BaseModel):
     fact: str
 
 # define '/me' endpoint
-@app.get("/me", status_code=status.HTTP_200_OK)
+@app.get("/me")
 async def getProfile():
 
     # Get the current time in UTC - ISO 8601 format
