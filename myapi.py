@@ -5,8 +5,6 @@ import requests
 
 app = FastAPI(title = "My Profile API Server")
 
-
-
 # Define timestamp model
 class Item(BaseModel):
     name: str
@@ -25,28 +23,14 @@ class Profile(BaseModel):
     timestamp: datetime
     fact: str
 
-# myProfile =  {
-#         "status": "success",
-#         "email": "adejinmiseyi@gmail.com",
-#         "name": "Oluwaseyi Adejinmi",
-#         "stack": "Backend - Python/FastAPI"
-#     }
-
-
-
-
-
-
-
-
+# define '/me' endpoint
 @app.get("/me", status_code=status.HTTP_200_OK)
 async def getProfile():
 
     # Get the current time in UTC - ISO 8601 format
     now_utc = datetime.now(timezone.utc)
 
-     # The Cat fact api call
-    # def cat_fact_api():
+    # The Cat fact api call
     url = "https://catfact.ninja/fact"
     response = requests.get(url, headers={"Content-Type": "application/json"},
                             )
@@ -58,13 +42,13 @@ async def getProfile():
         raise HTTPException(status_code=404, detail="No cat facts available")
             
     
-    # Get User bio information 
+    # ceate an instance of user bio information 
     user_data = userData ( 
         email = "adejinmiseyi@gmail.com",
         name = "Oluwaseyi Adejinmi",
         stack = "Backend - Python/FastAPI"
         )
-    
+    # Create an instance of the profile
     my_profile = Profile (
          status = "success",
          user =  user_data,
@@ -72,17 +56,7 @@ async def getProfile():
          fact = catFact
          
     )
-   
-    
-    # user =  {
-    #     "status": myProfile["status"],
-    #     "email": myProfile["email"],
-    #     "name": myProfile["name"],
-    #     "stack": myProfile["stack"],
-    # }
 
-    # "timestamp":  datetime.now(timezone.utc),
-    # "fact": catFact
 
     return my_profile
        
